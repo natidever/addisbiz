@@ -1,0 +1,2 @@
+path/to/folder/** filter=lfs diff=lfs merge=lfs -text
+C:/Users/win/StudioProjects/addisbiz/** filter=lfs diff=lfs merge=lfs -text
