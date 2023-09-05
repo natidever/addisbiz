@@ -60,20 +60,18 @@ class _CompanyListState extends State<CompanyList> {
                 ),
               ),
             ),
+
             SizedBox(
               height: 20,
             ),
-            FutureBuilder<List<Business>>(
-              future: getCompanyData(),
-              builder: (context, snapshot) {
-                if (snapshot.hasError) {
-                  print(snapshot.error);
-                }
-                if (snapshot.hasData) {
-                  companyDetail = snapshot.data!;
+            //These is second
 
+            FutureBuilder<List<Business>>(
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  companyDetail=snapshot.data!;
                   return Container(
-                    height: MediaQuery.of(context).size.height,
+                    height: MediaQuery.sizeOf(context).height,
                     child: ListView.separated(
                       itemBuilder: (context, index) {
                         return Card(
@@ -105,7 +103,8 @@ class _CompanyListState extends State<CompanyList> {
                                 Expanded(
                                   child: Column(
                                     children: [
-                                      Text(companyDetail[index].businessName),
+                                      Text(companyDetail[index].businessName ??
+                                          ''),
                                       Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
@@ -148,10 +147,11 @@ class _CompanyListState extends State<CompanyList> {
                   );
                 } else {
                   return Container(
-                    child: Text('loading..'),
-                  ); // Placeholder widget or loading indicator
+                    child: Text('Loading...'),
+                  );
                 }
               },
+              future: getCompanyData(),
             ),
           ],
         ),
@@ -160,126 +160,75 @@ class _CompanyListState extends State<CompanyList> {
   }
 }
 
-// Future<List<CompanyData>> getCompanyData() async {
-//   var uri =
-//       'https://addisbiz.com/business-directory/api/v1/business_directory_companies?category=$categoryAlies&subcategory=$subcategoryAlies';
-//   var companyUri = Uri.parse(uri);
-//   print(
-//       "================================================in the function=================");
-//   String categoryAlis = "categoryAlies=";
-//   String subcategoryAlis = "SubcategoryAlies=";
-//   var response = await http.get(companyUri);
-
-//   if (response.statusCode == 200) {
-//     var jsonBody = response.body;
-//     var body = json.decode(jsonBody);
-
-//     if (body['status'] != null && body['status'] == "failed") {
-//       print("Error: ${body['message']}");
-//       return [];
-//     }
-
-//     var businesses = body['businesses'];
-
-//     List<CompanyData> companyData = businesses.map<CompanyData>((json) {
-//       return CompanyData.fromJson(json);
-//     }).toList();
-
-//     return companyData;
-//   } else {
-//     print("Error occurred: ${response.statusCode}");
-//     return [];
-//   }
-// }
-
 Future<List<Business>> getCompanyData() async {
   try {
     var uri =
         'https://addisbiz.com/business-directory/api/v1/business_directory_companies?category=$categoryAlies&subcategory=$subcategoryAlies';
     var companyUri = Uri.parse(uri);
-    print(
-        "================================================in the function=================");
-    String categoryAlis = "categoryAlies=";
-    String subcategoryAlis = "SubcategoryAlies=";
-    print(categoryAlis + categoryAlies);
-    print(subcategoryAlis + subcategoryAlies);
-
-    // Catch the body by requesting
     var response = await http.get(companyUri);
     if (response.statusCode == 200) {
       var jsonBody = response.body;
       var jsonList = jsonDecode(jsonBody)['businesses'];
-      if (jsonList['status'] != null && jsonList['status'] == "failed") {
-        print("Error: ${jsonList['message']}");
-        return [];
-      }
+      // print("json list=> $jsonList");
+     List <Business>nano=  (jsonList as List).map((json) => Business.fromJson(json)).toList();
+        // print("value from business list => $nano");
+      return nano;
 
-      //final List<Business> companyDetail =
-      return (jsonList as List).map((json) => Business.fromJson(json)).toList();
-
-      // print("Comapny detail in function $companyDetail");
-      // print(companyDetail);
-      // return companyDetail;
+    } else {
+      // Handle the case when the API request fails
+      throw Exception('Failed to fetch company data');
     }
-  } catch (e) {}
-
-  return [];
+  } catch (e) {
+    print('Error in getCompanyData(): $e');
+    throw e;
+  }
+  // return [];
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
 // Future<List<Business>> getCompanyData() async {
-//   List<Business> companyDetail = [];
-//
 //   try {
-//     String categoryAlies = "yourCategoryAlies"; // Define your categoryAlies
-//     String subcategoryAlies =
-//         "yourSubcategoryAlies"; // Define your subcategoryAlies
-//
 //     var uri =
 //         'https://addisbiz.com/business-directory/api/v1/business_directory_companies?category=$categoryAlies&subcategory=$subcategoryAlies';
 //     var companyUri = Uri.parse(uri);
-//
 //     print(
 //         "================================================in the function=================");
-//     print("Category Alias: $categoryAlies");
-//     print("Subcategory Alias: $subcategoryAlies");
-//
+//     String categoryAlis = "categoryAlies=";
+//     String subcategoryAlis = "SubcategoryAlies=";
+//     print(categoryAlis + categoryAlies);
+//     print(subcategoryAlis + subcategoryAlies);
+
 //     // Catch the body by requesting
 //     var response = await http.get(companyUri);
 //     if (response.statusCode == 200) {
 //       var jsonBody = response.body;
-//       var body = jsonDecode(jsonBody);
-//
-//       if (body['status'] != null && body['status'] == "failed") {
-//         print("Error: ${body['message']}");
-//       } else if (body['businesses'] != null) {
-//         List businesses = body['businesses'];
-//         companyDetail = [];
-//
-//         for (var json in businesses) {
-//           Business business = Business.fromJson(json);
-//           companyDetail.add(business);
-//
-//           // Access business information
-//           print(business.businessName);
-//           print(business.fax);
-//           print(business.website);
-//         }
-//
-//         if (companyDetail.isEmpty) {
-//           print("No businesses found in the response");
-//         }
+//       var jsonData = jsonDecode(jsonBody);
+
+//       if (jsonData['businesses'] != null) {
+//         var jsonList = jsonData['businesses'];
+//         return (jsonList as List)
+//             .map((json) => Business.fromJson(json ?? {}))
+//             .toList();
+//       } else {
+//         throw Exception('No business data found');
 //       }
 //     } else {
-//       print("Error has occurred");
+//       // Handle the case when the API request fails
+//       throw Exception('Failed to fetch company data');
 //     }
-//     print(
-//         "==================  PRINTING COMPANY DATA  =====================================");
-//     print(companyDetail);
 //   } catch (e) {
-//     print("Exception caught: $e");
+//     print('Error in getCompanyData(): $e');
+//     throw e;
 //   }
-//
-//   print(companyDetail.length);
-//
-//   return companyDetail;
 // }

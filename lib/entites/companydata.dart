@@ -7,19 +7,21 @@ CompanyData welcomeFromJson(String str) =>
 String welcomeToJson(CompanyData data) => json.encode(data.toJson());
 
 class CompanyData {
-  String subcategoryalias;
+  String? subcategoryalias;
   List<Business> businesses;
 
   CompanyData({
-    required this.subcategoryalias,
+    this.subcategoryalias,
     required this.businesses,
   });
 
   factory CompanyData.fromJson(Map<String, dynamic> json) => CompanyData(
-        subcategoryalias: json["subcategoryalias"],
-        businesses: List<Business>.from(
-            json["businesses"].map((x) => Business.fromJson(x))),
-      );
+    subcategoryalias: json["subcategoryalias"],
+    businesses: (json["businesses"] as List<dynamic>? ?? [])
+        .map((x) => Business.fromJson(x))
+        .toList(),
+  );
+
 
   Map<String, dynamic> toJson() => {
         "subcategoryalias": subcategoryalias,
@@ -28,7 +30,7 @@ class CompanyData {
 }
 
 class Business {
-  String businessName;
+  String? businessName;
   City? city;
   String? package;
   int? businessId;
@@ -41,7 +43,7 @@ class Business {
   String? address;
 
   Business({
-    required this.businessName,
+    this.businessName,
     this.city,
     this.package,
     this.businessId,
@@ -55,17 +57,17 @@ class Business {
   });
 
   factory Business.fromJson(Map<String, dynamic> json) => Business(
-        businessName: json["BusinessName"],
-        city: cityValues.map[json["City"]]!,
-        package: json["Package"],
-        businessId: json["BusinessID"],
-        mobile: json["Mobile"],
-        office: json["Office"],
-        logo: json["Logo"],
-        fax: json["Fax"],
-        email: json["Email"],
-        website: json["Website"],
-        address: json["Address"],
+        businessName: json["BusinessName"] ?? '',
+        city: cityValues.map[json["City"]] ?? City.ADDIS_ABABA,
+        package: json["Package"] ?? '',
+        businessId: json["BusinessID"] ?? '',
+        mobile: json["Mobile"] ?? '',
+        office: json["Office"] ?? '',
+        logo: json["Logo"] ?? '',
+        fax: json["Fax"] ?? '',
+        email: json["Email"] ?? '',
+        website: json["Website"] ?? '',
+        address: json["Address"] ?? '',
       );
 
   Map<String, dynamic> toJson() => {
