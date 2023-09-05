@@ -19,20 +19,22 @@ import 'package:flutter/material.dart';
 // F2E85E --yellow,
 // #5EF29F --greenish
 
-const containerColor=Color.fromRGBO(8, 129, 163, 1);
-const red=Colors.red;
-
+const containerColor = Color.fromRGBO(8, 129, 163, 1);
+const red = Colors.red;
 
 /// second edition
 ///
-const backgroundColorForLightMode=Color.fromRGBO(246, 246, 246, 1);
-const buttonColor=Color.fromRGBO(236, 236, 236, 1);
-const containerColors=Colors.white;
-const appBarColor=Color.fromRGBO(40, 145, 237, 1.0);
+const backgroundColorForLightMode = Color.fromRGBO(246, 246, 246, 1);
+const buttonColor = Color.fromRGBO(236, 236, 236, 1);
+const containerColors = Colors.white;
+const appBarColor = Color.fromRGBO(40, 145, 237, 1.0);
+const baseColor = Color.fromRGBO(94, 242, 159, 1);
 
-const blackColor=Colors.black;
-const goldenColor=Color.fromRGBO(255, 210, 0, 1);
+const blackColor = Colors.black;
+const goldenColor = Color.fromRGBO(255, 210, 0, 1);
 // const containerColorForBlack=Color.fromRGBO(51, 51, 51, 1);
-const containerColorForBlack=Color.fromRGBO(17, 17, 17, 1);
-const buttonColorForBlack=Color.fromRGBO(221, 221, 221, 1);
+const containerColorForBlack = Color.fromRGBO(17, 17, 17, 1);
+const buttonColorForBlack = Color.fromRGBO(221, 221, 221, 1);
 
+const addisyellow = Color.fromRGBO(242, 232, 94, 1);
+const containerColorForSubcategory = Color.fromRGBO(216, 216, 216, 1);

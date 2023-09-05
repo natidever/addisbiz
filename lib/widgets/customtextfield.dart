@@ -10,8 +10,7 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 40,
-
+      height: 50,
         child: TextFormField(
              decoration: InputDecoration(
                contentPadding:EdgeInsets.only(top: 10),

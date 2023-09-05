@@ -5,11 +5,12 @@ import 'package:addisbiz/themes/light_them.dart';
 import 'package:addisbiz/pages/companyinfo.dart';
 import 'package:addisbiz/pages/companylist.dart';
 import 'package:addisbiz/themes/theme_provider.dart';
+import 'package:addisbiz/widgets/subcatagories_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:addisbiz/pages/homepage.dart';
 import 'package:addisbiz/pages/accomodation.dart';
 import 'package:provider/provider.dart';
-
+import 'package:addisbiz/widgets/subcatagories_widget.dart';
 import 'themes/dark_them.dart';
 //
 // void main() {
@@ -79,7 +80,7 @@ class MyApp extends StatelessWidget {
             home: MainPage(),
               debugShowCheckedModeBanner: false,
                             routes:{
-                "/page1":(context)=>Accomodation(),
+                "/page1":(context)=>ScreenDesign(),
                   // "/company":(context)=>CompanyList(),
                   "/companyinfo":(context)=>CompanyInfo(),
                   "/companylist":(context)=>CompanyList(),
