@@ -1,3 +1,4 @@
+import 'package:addisbiz/widgets/slider_images.dart';
 import 'package:flutter/material.dart';
 import 'package:addisbiz/constants.dart';
 import 'package:another_carousel_pro/another_carousel_pro.dart';
@@ -125,24 +126,25 @@ class _ScreenDesignState extends State<ScreenDesign> {
             ),
 
             expandedHeight: 350,
+            flexibleSpace: SliderImages(),
 
-            flexibleSpace: FlexibleSpaceBar(
-              background: Container(
-                child: AnotherCarousel(
-                    animationCurve: Curves.linear,
-                    autoplayDuration: Duration(seconds: 2),
-                    indicatorBgPadding: 4,
-                    dotBgColor: Colors.transparent,
-                    boxFit: BoxFit.fill,
-                    showIndicator: false,
-                    dotSize: 2,
-                    images: [
-                      AssetImage('assets/addisbiz.jpg'),
-                      AssetImage('assets/addisbiz.jpg'),
-                      AssetImage('assets/headerimage.jpg'),
-                    ]),
-              ),
-            ),
+            // flexibleSpace: FlexibleSpaceBar(
+            //   background: Container(
+            //     child: AnotherCarousel(
+            //         animationCurve: Curves.linear,
+            //         autoplayDuration: Duration(seconds: 2),
+            //         indicatorBgPadding: 4,
+            //         dotBgColor: Colors.transparent,
+            //         boxFit: BoxFit.fill,
+            //         showIndicator: false,
+            //         dotSize: 2,
+            //         images: [
+            //           AssetImage('assets/addisbiz.jpg'),
+            //           AssetImage('assets/addisbiz.jpg'),
+            //           AssetImage('assets/headerimage.jpg'),
+            //         ]),
+            //   ),
+            // ),
           ),
           //-============--//=== SEARCH=-=-=-=========================
           SliverToBoxAdapter(

@@ -16,12 +16,11 @@ class CompanyData {
   });
 
   factory CompanyData.fromJson(Map<String, dynamic> json) => CompanyData(
-    subcategoryalias: json["subcategoryalias"],
-    businesses: (json["businesses"] as List<dynamic>? ?? [])
-        .map((x) => Business.fromJson(x))
-        .toList(),
-  );
-
+        subcategoryalias: json["subcategoryalias"],
+        businesses: (json["businesses"] as List<dynamic>? ?? [])
+            .map((x) => Business.fromJson(x))
+            .toList(),
+      );
 
   Map<String, dynamic> toJson() => {
         "subcategoryalias": subcategoryalias,
@@ -61,7 +60,7 @@ class Business {
         city: cityValues.map[json["City"]] ?? City.ADDIS_ABABA,
         package: json["Package"] ?? '',
         businessId: json["BusinessID"] ?? '',
-        mobile: json["Mobile"] ?? '',
+        mobile: json["Mobile"] ?? 'we will add phone number soon',
         office: json["Office"] ?? '',
         logo: json["Logo"] ?? '',
         fax: json["Fax"] ?? '',
@@ -85,7 +84,13 @@ class Business {
       };
 }
 
-enum City { ADAMA_NAZRETH, ADDIS_ABABA, ASSELA, MEKELLE, NEKEMTE }
+enum City {
+  ADAMA_NAZRETH,
+  ADDIS_ABABA,
+  ASSELA,
+  MEKELLE,
+  NEKEMTE,
+}
 
 final cityValues = EnumValues({
   "Adama / Nazreth": City.ADAMA_NAZRETH,
