@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:addisbiz/entites/verifiedbusinesses.dart';
 import 'package:addisbiz/widgets/customtextfield.dart';
 import 'package:addisbiz/pages/companylist.dart';
 import 'package:flutter/foundation.dart';
@@ -9,6 +12,7 @@ import 'package:flutter/services.dart';
 import '../entites/api.dart';
 import 'package:another_carousel_pro/another_carousel_pro.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
   @override
@@ -63,6 +67,40 @@ shimmerLoading() {
         );
       },
       itemCount: 9,
+    ),
+    baseColor: Colors.grey[300]!,
+    highlightColor: Colors.grey[100]!,
+  );
+}
+
+shimmerLoadingFeatured() {
+  return Shimmer.fromColors(
+    child: Container(
+      width: double.infinity,
+      height: 150,
+      child: Padding(
+        padding: const EdgeInsets.only(left: 8.0),
+        child: GridView.builder(
+          scrollDirection: Axis.horizontal,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 1,
+            mainAxisSpacing: 15,
+          ),
+          itemBuilder: (context, index) {
+            return Container(
+              width: 250,
+              height: 150,
+              decoration: BoxDecoration(
+                //================
+                color: Theme.of(context).backgroundColor,
+                //===================================
+                borderRadius: BorderRadius.circular(10),
+              ),
+            );
+          },
+          itemCount: 9,
+        ),
+      ),
     ),
     baseColor: Colors.grey[300]!,
     highlightColor: Colors.grey[100]!,
@@ -193,6 +231,7 @@ class _HomePageState extends State<HomePage> {
       }
     });
     getCategories();
+    getVerifiedbusiness();
 
     // Add your initialization code here
   }
@@ -270,64 +309,81 @@ class _HomePageState extends State<HomePage> {
               ),
             )),
             SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-                child: Container(
-                  height: 250,
-                  child: ListView(
-                    scrollDirection: Axis.horizontal,
-                    children: List.generate(10, (index) {
-                      return Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 8.0), //pading between containers
-                          child: Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                // color: Colors.grey
-                                //   color: Color.fromRGBO(226, 229, 210, 1)
-                                //   color: Color.fromRGBO(215, 220, 222, 1),
-                                //   color: Color.fromRGBO(57, 74, 89, 1),
-                                color: Color.fromRGBO(215, 215, 215, 1)),
-                            width: 200,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.only(
-                                    bottomRight: Radius.circular(0),
-                                    bottomLeft: Radius.circular(0),
-                                    topRight: Radius.circular(10),
-                                    topLeft: Radius.circular(10),
+              child: FutureBuilder<List<Verifiedbusiness>>(
+                  future: getVerifiedbusiness(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return shimmerLoadingFeatured();
+                    }
+                    List<Verifiedbusiness> verifiedBusinessList =
+                        snapshot.data ?? [];
+                    // print(verifiedBusinessList.first.nm);
+                    return Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                      child: Container(
+                        height: 250,
+                        child: ListView(
+                          scrollDirection: Axis.horizontal,
+                          children: List.generate(10, (index) {
+                            return Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal:
+                                        8.0), //pading between containers
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      // color: Colors.grey
+                                      //   color: Color.fromRGBO(226, 229, 210, 1)
+                                      //   color: Color.fromRGBO(215, 220, 222, 1),
+                                      //   color: Color.fromRGBO(57, 74, 89, 1),
+                                      color: Color.fromRGBO(215, 215, 215, 1)),
+                                  width: 200,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      ClipRRect(
+                                        borderRadius: BorderRadius.only(
+                                          bottomRight: Radius.circular(0),
+                                          bottomLeft: Radius.circular(0),
+                                          topRight: Radius.circular(10),
+                                          topLeft: Radius.circular(10),
+                                        ),
+                                        child: Image(
+                                          image:
+                                              AssetImage('assets/addisbiz.jpg'),
+                                          height: 150,
+                                          width: 200,
+                                          fit: BoxFit.fill,
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Text(
+                                          // "Nazarawit plastic manufacturing plc and other incubat ",
+                                          verifiedBusinessList[index].nm,
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 3,
+                                          textAlign: TextAlign.start,
+                                          style: TextStyle(
+                                            letterSpacing: 1,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 17,
+                                            color:
+                                                Color.fromRGBO(50, 50, 50, 1),
+                                            // color: baseColor
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                  child: Image(
-                                    image: AssetImage('assets/addisbiz.jpg'),
-                                    height: 150,
-                                    width: 200,
-                                    fit: BoxFit.fill,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                    "Nazarawit plastic manufacturing plc and other incubat ",
-                                    textAlign: TextAlign.start,
-                                    style: TextStyle(
-                                      letterSpacing: 1,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 17,
-                                      color: Color.fromRGBO(50, 50, 50, 1),
-                                      // color: baseColor
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ));
-                    }),
-                  ),
-                ),
-              ),
+                                ));
+                          }),
+                        ),
+                      ),
+                    );
+                  }),
             ), //sliver of featured
 
             SliverPadding(padding: EdgeInsets.only(bottom: 40)),
@@ -344,68 +400,90 @@ class _HomePageState extends State<HomePage> {
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(10, 10, 0, 50),
-                child: Container(
-                  height: 250,
-                  child: ListView(
-                    scrollDirection: Axis.horizontal,
-                    children: List.generate(10, (index) {
+                child: FutureBuilder<List<Verifiedbusiness>>(
+                    future: getVerifiedbusiness(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return shimmerLoadingFeatured();
+                      }
+                      List<Verifiedbusiness> verifiedBusinessList =
+                          snapshot.data ?? [];
+                      // print(verifiedBusinessList.first.nm);
                       return Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 8.0), //pading between containers
-                          child: Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                // color: Colors.grey
-                                //   color: Color.fromRGBO(226, 229, 210, 1)
-                                // color: Color.fromRGBO(215, 220, 222, 1),
-                                color: Color.fromRGBO(215, 215, 215, 1)),
-                            width: 200,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.only(
-                                    bottomRight: Radius.circular(0),
-                                    bottomLeft: Radius.circular(0),
-                                    topRight: Radius.circular(10),
-                                    topLeft: Radius.circular(10),
-                                  ),
-                                  child: Image(
-                                    image: AssetImage('assets/addisbiz.jpg'),
-                                    height: 150,
+                        padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                        child: Container(
+                          height: 250,
+                          child: ListView(
+                            scrollDirection: Axis.horizontal,
+                            children: List.generate(10, (index) {
+                              return Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal:
+                                          8.0), //pading between containers
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        // color: Colors.grey
+                                        //   color: Color.fromRGBO(226, 229, 210, 1)
+                                        //   color: Color.fromRGBO(215, 220, 222, 1),
+                                        //   color: Color.fromRGBO(57, 74, 89, 1),
+                                        color:
+                                            Color.fromRGBO(215, 215, 215, 1)),
                                     width: 200,
-                                    fit: BoxFit.fill,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 3,
-                                    "DNG ,Business Consultancy, & Construction Works ",
-                                    textAlign: TextAlign.start,
-                                    softWrap: true,
-                                    style: TextStyle(
-                                      letterSpacing: 1,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 17,
-                                      color: Color.fromRGBO(15, 15, 15, 1),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        ClipRRect(
+                                          borderRadius: BorderRadius.only(
+                                            bottomRight: Radius.circular(0),
+                                            bottomLeft: Radius.circular(0),
+                                            topRight: Radius.circular(10),
+                                            topLeft: Radius.circular(10),
+                                          ),
+                                          child: Image(
+                                            image: AssetImage(
+                                                'assets/addisbiz.jpg'),
+                                            height: 150,
+                                            width: 200,
+                                            fit: BoxFit.fill,
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Text(
+                                            // "Nazarawit plastic manufacturing plc and other incubat ",
+                                            verifiedBusinessList[index].nm,
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 3,
+                                            textAlign: TextAlign.start,
+                                            style: TextStyle(
+                                              letterSpacing: 1,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 17,
+                                              color:
+                                                  Color.fromRGBO(50, 50, 50, 1),
+                                              // color: baseColor
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ));
+                                  ));
+                            }),
+                          ),
+                        ),
+                      );
                     }),
-                  ),
-                ),
               ),
             )
           ],
         ),
       ),
     );
+
     // return   Scaffold(
     //   drawer: NavBar(),
     //   body: SafeArea(
@@ -441,6 +519,33 @@ class _HomePageState extends State<HomePage> {
     //     ),
     //   ),
     // );
+  }
+
+  Future<List<Verifiedbusiness>> getVerifiedbusiness() async {
+    List<Verifiedbusiness> verfiedBusinesses = [];
+    try {
+      var categoriesURL = Uri.parse(
+          "https://addisbiz.com/business-directory/api/v1/business_directory_verified_businesses");
+      var response = await http.get(categoriesURL);
+      if (response.statusCode == 200) {
+        var jsonBody = response.body;
+        var body = json.decode(jsonBody);
+        // print('body=====> $body');
+
+        // print(body['categories']);
+
+        verfiedBusinesses = List<Verifiedbusiness>.from(
+            body["verifiedbusinesses"]
+                .map((json) => Verifiedbusiness.fromJson(json)));
+      } else {
+        print("Error occurred veridied business: ${response.statusCode}");
+        print("Error body: ${response.body}");
+      }
+    } catch (e) {
+      // print('error in getVerifiedBusiness $e');
+    }
+    // print('verified businesses =================>  $verfiedBusinesses');
+    return verfiedBusinesses;
   }
 }
 

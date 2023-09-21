@@ -14,7 +14,6 @@ class Accomodation extends StatefulWidget {
   State<Accomodation> createState() => _AccomodationState();
 }
 
-
 class _AccomodationState extends State<Accomodation> {
   @override
   Widget build(BuildContext context) {

@@ -40,6 +40,8 @@ class Business {
   String? email;
   String? website;
   String? address;
+  String? shortDescription;
+  String? mainDescription;
 
   Business({
     this.businessName,
@@ -53,21 +55,24 @@ class Business {
     this.email,
     this.website,
     this.address,
+    this.mainDescription,
+    this.shortDescription,
   });
 
   factory Business.fromJson(Map<String, dynamic> json) => Business(
-        businessName: json["BusinessName"] ?? '',
-        city: cityValues.map[json["City"]] ?? City.ADDIS_ABABA,
-        package: json["Package"] ?? '',
-        businessId: json["BusinessID"] ?? '',
-        mobile: json["Mobile"] ?? 'we will add phone number soon',
-        office: json["Office"] ?? '',
-        logo: json["Logo"] ?? '',
-        fax: json["Fax"] ?? '',
-        email: json["Email"] ?? '',
-        website: json["Website"] ?? '',
-        address: json["Address"] ?? '',
-      );
+      businessName: json["BusinessName"] ?? '',
+      city: cityValues.map[json["City"]] ?? City.ADDIS_ABABA,
+      package: json["Package"] ?? '',
+      businessId: json["BusinessID"] ?? '',
+      mobile: json["Mobile"] ?? 'we will add phone number soon',
+      office: json["Office"] ?? '',
+      logo: json["Logo"] ?? '',
+      fax: json["Fax"] ?? '',
+      email: json["Email"] ?? '',
+      website: json["Website"] ?? '',
+      address: json["Address"] ?? '',
+      shortDescription: json["ShortDescription"] ?? '',
+      mainDescription: json["MainDescription"] ?? '');
 
   Map<String, dynamic> toJson() => {
         "BusinessName": businessName,

@@ -1,26 +1,63 @@
 import 'package:addisbiz/constants.dart';
+import 'package:addisbiz/pages/homepage.dart';
 import 'package:flutter/material.dart';
 
 class NavBar extends StatelessWidget {
-
-
+  // final scaffoldKeys = GlobalKey<ScaffoldState>();
+  // final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
-    return  Drawer(
-        child: Column(
-          children: [
-             DrawerHeader(
-               padding: EdgeInsets.zero,
-                 child: Container(color: appBarColor,))
-          ],
-        ),
-
-
+    return Drawer(
+      child: Column(
+        children: [
+          DrawerHeader(
+            padding: EdgeInsets.zero,
+            child: Container(
+              width: double.infinity,
+              child: Image(
+                fit: BoxFit.fill,
+                image: AssetImage('assets/addisbiz.jpg'),
+              ),
+            ),
+          ),
+          ListTile(
+            onTap: () {
+              Navigator.pushNamed(context, '/HomePage');
+              // scaffoldKeys.currentState?.closeDrawer();
+              scaffoldKey.currentState?.closeDrawer();
+              // Navigator.pop(context);
+            },
+            iconColor: baseColor,
+            textColor: baseColor,
+            leading: Icon(
+              Icons.home,
+              size: 30,
+            ),
+            title: Text(
+              'Home',
+              style: TextStyle(fontSize: 20),
+            ),
+            selectedColor: baseColor,
+          ),
+          ListTile(
+            onTap: () => {
+              Navigator.pushNamed(context, '/category'),
+              scaffoldKey.currentState?.closeDrawer()
+            },
+            leading: Icon(
+              Icons.category_outlined,
+              size: 30,
+            ),
+            title: Text(
+              'category',
+              style: TextStyle(fontSize: 20),
+            ),
+            selectedColor: baseColor,
+          )
+        ],
+      ),
     );
-
-
-
   }
 }
 

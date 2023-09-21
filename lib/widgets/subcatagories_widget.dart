@@ -108,6 +108,7 @@ class _ScreenDesignState extends State<ScreenDesign> {
         slivers: [
           //slider
           SliverAppBar(
+            automaticallyImplyLeading: true,
             // backgroundColor: Color.fromRGBO(250, 235, 215, 1),
 
             // backgroundColor: Colors.black,
