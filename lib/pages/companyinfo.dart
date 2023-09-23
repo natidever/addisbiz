@@ -5,6 +5,7 @@ import 'package:shimmer/shimmer.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:drop_cap_text/drop_cap_text.dart';
 
 import 'package:addisbiz/constants.dart';
 import 'package:addisbiz/entites/companydata.dart';
@@ -36,6 +37,9 @@ class _CompanyInfoState extends State<CompanyInfo> {
   }
 
   List<Business>? companyDetailData;
+  static String?imageEndePoint;
+  String ?imageUri = "https://addisbiz.com/business-directory/wp-content/uploads/products/$imageEndePoint";
+
 
   void openPhoneDialer(String phoneNumber) async {
     print("=====================call functionn=======================");
@@ -55,6 +59,50 @@ class _CompanyInfoState extends State<CompanyInfo> {
     final arguments =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     businessId = arguments['businessId'];
+    String test1="HUMAN RESOURCE (HRM) AND PAYROLL SOFTWARE DEVELOPMENT AND SUPPLY'";
+    String test2 = "Our human resource and payroll software is a state of the art system that can manage all employee information and easily process payroll. The HRM and payroll systems allows you to avoid manual payroll calculations that will save you valuable time and give you accuracy and consistency.";
+     // TextSpan textSpan =TextSpan(
+     //   text: test1,
+     //   style: TextStyle(color:Colors.red,fontSize: 50,),
+     //
+     // );
+     // RichText richText = RichText(text: textSpan);
+     // String test11=textSpan.toPlainText();
+
+
+
+
+    String styledString = 'Hello, world!';
+
+    TextSpan textSpan = TextSpan(
+      text: styledString,
+      style: TextStyle(
+        fontWeight: FontWeight.bold,
+        fontStyle: FontStyle.italic,
+        fontSize: 16,
+        color: Colors.blue,
+      ),
+    );
+
+    RichText richText = RichText(
+      text: textSpan,
+    );
+
+// Now you can use the `richText` widget or extract the styled text as a string.
+    String styledTextString = textSpan.toPlainText();
+
+
+
+
+
+
+
+
+
+    List<String> mobileNumbers =
+        companyDetailData?.first.mobile?.split(';') ?? [];
+    List<String> officeNumbers =
+        companyDetailData?.first.office?.split(';') ?? [];
     // print('BusinessId====>>>>>$businessId');
 
     // Future<void> openWebsites() async {
@@ -108,6 +156,7 @@ class _CompanyInfoState extends State<CompanyInfo> {
     }
 
     return Scaffold(
+      backgroundColor: Colors.white,
       // backgroundColor: Color.fromRGBO(228, 228, 228, 1),
       body: CustomScrollView(
         slivers: [
@@ -125,286 +174,7 @@ class _CompanyInfoState extends State<CompanyInfo> {
                   image: AssetImage('assets/bluraddisbiz.jpg')),
             ),
           ),
-          // SliverPadding(
-          //   padding: EdgeInsets.only(bottom: 15),
-          // ),
-          // SliverToBoxAdapter(
-          //   child: Padding(
-          //     padding:
-          //         const EdgeInsets.symmetric(vertical: 50.0, horizontal: 10),
-          //     child: ClipRRect(
-          //       borderRadius: BorderRadius.circular(15),
-          //       child: Container(
-          //         width: double.infinity,
-          //         height: MediaQuery.of(context).size.height * 0.35,
 
-          //         decoration: BoxDecoration(
-          //           color: backgroundColorForLightMode,
-          //         ),
-          //         child: Row(children: [
-          //           Expanded(
-          //             flex: 2,
-          //             child: Container(
-          //               decoration: BoxDecoration(
-          //                 color: Colors.white,
-          //                 // image: DecorationImage(
-          //                 //   fit: BoxFit.fill,
-          //                 //   image: AssetImage('assets/contactus.jpg'),
-          //                 // ),
-          //               ),
-          //               child: Padding(
-          //                 padding: const EdgeInsets.fromLTRB(15.0, 10, 0, 0),
-          //                 child: Column(
-          //                   crossAxisAlignment: CrossAxisAlignment.start,
-          //                   children: [
-          //                     RichText(
-          //                       text: TextSpan(
-          //                           // style: DefaultTextStyle.of(context).style,
-          //                           children: <TextSpan>[
-          //                             TextSpan(
-          //                               text: "Contact ",
-          //                               style: GoogleFonts.italiana(
-          //                                 fontSize: 20,
-          //                                 color: blackColor,
-          //                               ),
-          //                             ),
-          //                             TextSpan(
-          //                               text: "Us",
-          //                               style: GoogleFonts.italiana(
-          //                                   fontSize: 22,
-          //                                   color: baseColor,
-          //                                   fontWeight: FontWeight.bold),
-          //                             )
-          //                           ]),
-          //                     ),
-          //                     SizedBox(
-          //                       height: 60,
-          //                     ),
-          //                     Text("Let's work together",
-          //                         style: GoogleFonts.italiana(
-          //                             fontSize: 22,
-          //                             color: blackColor,
-          //                             fontWeight: FontWeight.bold),
-          //                             ),
-          //                   ],
-          //                 ),
-          //               ),
-          //             ),
-          //           ),
-          //           Container(
-          //             color: Colors.transparent,
-          //             child: VerticalDivider(
-          //               color: Colors.black,
-          //               thickness: 2,
-          //               width: 0.8,
-          //               indent: 70,
-          //               endIndent: 70,
-          //             ),
-          //           ),
-          //           Expanded(
-          //               flex: 3,
-          //               child: Container(
-          //                 decoration: BoxDecoration(
-          //                   color: Colors.white,
-          //                 ),
-          //                 child: FutureBuilder<List<Business>>(
-          //                     future: getCompanyDetail(),
-          //                     builder: (context, snapshot) {
-          //                       companyDetailData = snapshot.data;
-          //                       List<String> mobileNumbers = companyDetailData
-          //                               ?.first.mobile
-          //                               ?.split(';') ??
-          //                           [];
-          //                       print('Mobile numbers $mobileNumbers');
-          //                       List<String> officeNumbers = companyDetailData
-          //                               ?.first.office
-          //                               ?.split(';') ??
-          //                           [];
-          //                       print('office numbers $officeNumbers');
-          //                       return Column(
-          //                         mainAxisAlignment: MainAxisAlignment.center,
-          //                         // mainAxisSize: MainAxisSize.min,
-          //                         children: [
-          //                           companyDetailData?.first.website == ''
-          //                               ? Container(
-          //                                   width: 1,
-          //                                   height: 1,
-          //                                 )
-          //                               : GestureDetector(
-          //                                   onTap: () {
-          //                                     var parseedUrl = Uri.parse(
-          //                                         companyDetailData
-          //                                                 ?.first.website ??
-          //                                             '');
-          //                                     print('webiste');
-          //                                     print(companyDetailData
-          //                                         ?.first.website);
-          //                                     _launchUrl(parseedUrl);
-          //                                   },
-          //                                   child: Container(
-          //                                     width: 70,
-          //                                     height: 30,
-          //                                     child: Center(
-          //                                         child: Text("Website")),
-          //                                     decoration: BoxDecoration(
-          //                                       color: baseColor,
-          //                                       borderRadius:
-          //                                           BorderRadius.circular(5),
-          //                                     ),
-          //                                   ),
-          //                                 ),
-          //                           SizedBox(
-          //                             height: 5,
-          //                           ),
-          //                           companyDetailData?.first.email == ''
-          //                               ? Container(
-          //                                   height: 1,
-          //                                   width: 1,
-          //                                 )
-          //                               : GestureDetector(
-          //                                   onTap: () {
-          //                                     String email = companyDetailData
-          //                                             ?.first.email ??
-          //                                         '';
-          //                                     print("Email : $email");
-          //                                     lauchEmail(email);
-          //                                   },
-          //                                   child: Container(
-          //                                     width: 70,
-          //                                     height: 30,
-          //                                     child:
-          //                                         Center(child: Text("Email")),
-          //                                     decoration: BoxDecoration(
-          //                                       color: baseColor,
-          //                                       borderRadius:
-          //                                           BorderRadius.circular(5),
-          //                                     ),
-          //                                   ),
-          //                                 ),
-          //                           SizedBox(
-          //                             height: 15,
-          //                           ),
-          //                           Text(
-          //                             "Call",
-          //                             style: TextStyle(
-          //                               fontWeight: FontWeight.bold,
-          //                             ),
-          //                           ),
-          //                           SizedBox(
-          //                             height: 5,
-          //                           ),
-          //                           Row(
-          //                             mainAxisAlignment:
-          //                                 MainAxisAlignment.center,
-          //                             // mainAxisSize: MainAxisSize.min,
-          //                             children: [
-          //                               Column(
-          //                                 // mainAxisSize: MainAxisSize.min,
-          //                                 children: [
-          //                                   Text(
-          //                                     "Office",
-          //                                     style: TextStyle(
-          //                                         fontWeight: FontWeight.bold),
-          //                                   ),
-          //                                   SizedBox(
-          //                                     height: 100,
-          //                                     width: 110,
-          //                                     child: ListView.builder(
-          //                                       // shrinkWrap: true,
-          //                                       itemCount: officeNumbers.length,
-          //                                       itemBuilder: ((context,
-          //                                               index) =>
-          //                                           Padding(
-          //                                             padding: const EdgeInsets
-          //                                                 .fromLTRB(0, 5, 0, 5),
-          //                                             child: GestureDetector(
-          //                                               onTap: () {
-          //                                                 String cickedONumber =
-          //                                                     officeNumbers[
-          //                                                         index];
-          //                                                 openPhoneDialer(
-          //                                                     cickedONumber);
-          //                                               },
-          //                                               child: Text(
-          //                                                 officeNumbers[index],
-          //                                                 style: TextStyle(
-          //                                                   color: blackColor,
-          //                                                   fontSize: 14,
-          //                                                 ),
-          //                                               ),
-          //                                             ),
-          //                                           )),
-          //                                     ),
-          //                                   )
-          //                                 ],
-          //                               ),
-          //                               SizedBox(
-          //                                 width: 10,
-          //                               ),
-          //                               Column(
-          //                                 children: [
-          //                                   Text(
-          //                                     'Mobile',
-          //                                     style: TextStyle(
-          //                                         fontWeight: FontWeight.bold),
-          //                                   ),
-          //                                   Container(
-          //                                     height: 100,
-          //                                     width: 110,
-          //                                     child: ListView.builder(
-          //                                       // shrinkWrap: true,
-          //                                       itemCount: mobileNumbers.length,
-          //                                       itemBuilder: ((context,
-          //                                               index) =>
-          //                                           Padding(
-          //                                             padding: const EdgeInsets
-          //                                                 .fromLTRB(0, 5, 0, 5),
-          //                                             child: GestureDetector(
-          //                                               onTap: () {
-          //                                                 String cickedMNumber =
-          //                                                     mobileNumbers[
-          //                                                         index];
-          //                                                 openPhoneDialer(
-          //                                                     cickedMNumber);
-          //                                               },
-          //                                               child: Text(
-          //                                                 mobileNumbers[index],
-          //                                                 style: TextStyle(
-          //                                                   // color: baseColor,
-          //                                                   fontSize: 14,
-          //                                                 ),
-          //                                               ),
-          //                                             ),
-          //                                           )),
-          //                                     ),
-          //                                   )
-          //                                 ],
-          //                               ),
-          //                             ],
-          //                           )
-          //                         ],
-          //                       );
-          //                     }),
-          //               ))
-          //         ]),
-          //       ),
-          //     ),
-          //   ),
-          // )
-          // SliverToBoxAdapter(
-          //   child: Expanded(
-          //     child: Container(
-          //      child: Column(
-          //       children: [
-          //         ListTile(
-
-          //         )
-          //       ],
-          //      ),
-
-          //     ),
-          //   )
-          // )
           SliverToBoxAdapter(
             child: FutureBuilder<List<Business>>(
                 future: getCompanyDetail(),
@@ -414,25 +184,18 @@ class _CompanyInfoState extends State<CompanyInfo> {
                   }
                   companyDetailData = snapshot.data;
 
-                  List<String> mobileNumbers =
+                  mobileNumbers =
                       companyDetailData?.first.mobile?.split(';') ?? [];
-                  List<String> officeNumbers =
+                  officeNumbers =
                       companyDetailData?.first.office?.split(';') ?? [];
 
                   print("company detail data $companyDetailData");
                   if (snapshot.hasData) {
                     return Container(
-                      height: MediaQuery.sizeOf(context).height * 0.89,
+                      // height: MediaQuery.sizeOf(context).height * 0.98,
+                      height: 450,
                       width: double.infinity,
                       color: Theme.of(context).backgroundColor,
-
-                      // decoration: BoxDecoration(
-                      //     // color: Color.fromRGBO(230, 240, 236, 1),
-                      //     borderRadius: BorderRadius.only(
-                      //       topLeft: Radius.circular(50),
-                      //       topRight: Radius.circular(50),
-                      //     ),
-                      //     ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
@@ -459,7 +222,8 @@ class _CompanyInfoState extends State<CompanyInfo> {
                                   height: 1,
                                 )
                               : Padding(
-                                  padding: const EdgeInsets.all(8.0),
+                                  padding:
+                                      const EdgeInsets.fromLTRB(8.0, 5, 8, 0),
                                   child: Container(
                                     // padding: EdgeInsets.all(5),
                                     // decoration: BoxDecoration(
@@ -474,385 +238,14 @@ class _CompanyInfoState extends State<CompanyInfo> {
                                     ),
                                   ),
                                 ),
-                          Divider(
-                              // color: Colors.black,
-                              ),
-                          // Padding(
-                          //   padding: const EdgeInsets.only(bottom: 10.0),
-                          //   child: Container(
-                          //     height: 70,
-                          //     padding: EdgeInsets.all(8),
-                          //     width: double.infinity,
-                          //     // color: Colors.grey[300],
-                          //     child: Center(
-                          //       child: Text(
-                          //         'CONTACT INFORMATION',
-                          //         style: GoogleFonts.roboto(
-                          //           color: Color.fromRGBO(3, 166, 120, 1),
-                          //           fontSize: 22,
-                          //         ),
-                          //       ),
-                          //     ),
-                          //   ),
+
+                          //product and servies
+
+                          // Divider(
+                          //   height: 1,
+                          //   thickness: 2,
+                          //   color: blackColor,
                           // ),
-                          Divider(
-                            height: 1,
-                            thickness: 2,
-                            color: blackColor,
-                          ),
-                          Expanded(
-                            // height: MediaQuery.of(context).size.height * 0.6,
-                            // flex: 2,
-                            child: ListView(
-                              shrinkWrap: true,
-                              physics: NeverScrollableScrollPhysics(),
-                              children: [
-                                //mobile code
-                                // companyDetailData?.first.mobile == ''
-                                // ? Container(
-                                //     width: 5,
-                                //     height: 5,
-                                //   )
-                                ListTile(
-                                  leading: Container(
-                                    width: MediaQuery.of(context).size.width *
-                                        0.25,
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Icon(
-                                          Icons.phone_android,
-                                          color: blackColor,
-                                        ),
-                                        SizedBox(
-                                          width: 4,
-                                        ),
-                                        Text(
-                                          'Mobile: ',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  title: Container(
-                                    height: mobileNumbers.length * 30,
-                                    child: ListView.builder(
-                                        itemCount: mobileNumbers.length,
-                                        itemBuilder: (context, index) {
-                                          return Padding(
-                                            padding: const EdgeInsets.only(
-                                                bottom: 10.0),
-                                            child: GestureDetector(
-                                              onTap: () {
-                                                openPhoneDialer(
-                                                    mobileNumbers[index]);
-                                              },
-                                              child: Text(
-                                                style: TextStyle(
-                                                    color: Colors.blue),
-                                                mobileNumbers[index],
-                                              ),
-                                            ),
-                                          );
-                                        }),
-                                  ),
-                                  // title: Text(
-                                  //   textAlign: TextAlign.center,
-
-                                  //   companyDetailData?.first.mobile ?? "",
-
-                                  //   // '091231212',
-                                  //   style: TextStyle(
-                                  //     letterSpacing: 1,
-                                  //   ),
-                                  // ),
-                                  trailing: CustomButton(
-                                    callbackAction: () {
-                                      openPhoneDialer(mobileNumbers.first);
-                                    },
-                                    buttonText: 'Call',
-                                    width: 70,
-                                    height: 30,
-                                    buttonColor: baseColor,
-                                    textColor: blackColor,
-                                  ),
-                                ),
-                                Divider(
-                                    height: 1,
-                                    color: blackColor,
-                                    thickness: 0.3),
-                                // companyDetailData?.first.office == ''
-                                //     ? Container(
-                                //         height: 1,
-                                //         width: 1,
-                                //       )
-                                ListTile(
-                                  leading: Container(
-                                    width: MediaQuery.of(context).size.width *
-                                        0.30,
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Icon(
-                                          Icons.phone_android,
-                                          color: blackColor,
-                                        ),
-                                        SizedBox(
-                                          width: 4,
-                                        ),
-                                        Text(
-                                          'Telephone: ',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  // title: Text(
-                                  //   companyDetailData?.first.office ??
-                                  //       '',
-                                  // ),
-                                  title: Container(
-                                    height: officeNumbers.length * 25,
-                                    child: ListView.builder(
-                                        itemCount: mobileNumbers.length,
-                                        itemBuilder: (context, index) {
-                                          return Padding(
-                                            padding: const EdgeInsets.only(
-                                                bottom: 10.0),
-                                            child: GestureDetector(
-                                              onTap: () {
-                                                openPhoneDialer(
-                                                    officeNumbers[index]);
-                                              },
-                                              child: Text(
-                                                style: TextStyle(
-                                                    color: Colors.blue),
-                                                officeNumbers[index],
-                                              ),
-                                            ),
-                                          );
-                                        }),
-                                  ),
-                                  trailing: CustomButton(
-                                    callbackAction: () {
-                                      openPhoneDialer(
-                                          companyDetailData?.first.office ??
-                                              '');
-                                    },
-                                    buttonText: 'Call',
-                                    width: 70,
-                                    height: 30,
-                                    buttonColor: baseColor,
-                                    textColor: blackColor,
-                                  ),
-                                ),
-                                Divider(
-                                  height: 1,
-                                  thickness: 0.3,
-                                  color: blackColor,
-                                ),
-
-                                ListTile(
-                                  //showing leading and trailing based on presence of the data
-                                  leading:
-                                      // companyDetailData?.first.website == ''
-                                      // ?Container(
-                                      //     width: 1,
-                                      //     height: 1,
-                                      Container(
-                                    width: MediaQuery.of(context).size.width *
-                                        0.25,
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Icon(
-                                          Icons.email,
-                                          color: blackColor,
-                                        ),
-                                        SizedBox(
-                                          width: 4,
-                                        ),
-                                        Text(
-                                          'Email: ',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-
-                                  // Icon(Icons.language, color: blackColor),
-
-                                  title: Text(
-                                    companyDetailData?.first.email ?? '',
-
-                                    // 'www.moniza.et.com',
-                                    style: TextStyle(),
-                                  ),
-                                  trailing:
-                                      // companyDetailData?.first.website == ''
-                                      // ? Container(
-                                      //     width: 10,
-                                      //   )
-                                      CustomButton(
-                                    callbackAction: () {
-                                      lauchEmail(
-                                          companyDetailData?.first.email ?? '');
-                                    },
-                                    buttonText: 'Email',
-                                    width: 70,
-                                    height: 30,
-                                    buttonColor: baseColor,
-                                    textColor: blackColor,
-                                  ),
-                                ),
-
-                                Divider(
-                                  height: 1,
-                                  thickness: 0.3,
-                                  color: blackColor,
-                                ),
-
-                                ListTile(
-                                  //showing leading and trailing based on presence of the data
-                                  leading:
-                                      // companyDetailData?.first.website == ''
-                                      // ?Container(
-                                      //     width: 1,
-                                      //     height: 1,
-                                      Container(
-                                    width: MediaQuery.of(context).size.width *
-                                        0.25,
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Icon(
-                                          Icons.language,
-                                          color: blackColor,
-                                        ),
-                                        SizedBox(
-                                          width: 4,
-                                        ),
-                                        Text(
-                                          'Website: ',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-
-                                  // Icon(Icons.language, color: blackColor),
-
-                                  title: Text(
-                                    companyDetailData?.first.website ?? '',
-
-                                    // 'www.moniza.et.com',
-                                    style: TextStyle(),
-                                  ),
-                                  trailing:
-                                      // companyDetailData?.first.website == ''
-                                      // ? Container(
-                                      //     width: 10,
-                                      //   )
-                                      CustomButton(
-                                    callbackAction: () {
-                                      var parsedUri = Uri.parse(
-                                          companyDetailData?.first.website ??
-                                              "");
-                                      print(companyDetailData?.first.website);
-                                      _launchUrl(
-                                          companyDetailData?.first.website ??
-                                              '');
-                                    },
-                                    buttonText: 'visit',
-                                    width: 70,
-                                    height: 30,
-                                    buttonColor: baseColor,
-                                    textColor: blackColor,
-                                  ),
-                                ),
-
-                                Divider(
-                                  height: 1,
-                                  thickness: 0.3,
-                                  color: blackColor,
-                                ),
-
-                                ListTile(
-                                  //showing leading and trailing based on presence of the data
-                                  leading:
-                                      // companyDetailData?.first.website == ''
-                                      // ?Container(
-                                      //     width: 1,
-                                      //     height: 1,
-                                      Container(
-                                    width: MediaQuery.of(context).size.width *
-                                        0.25,
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Icon(
-                                          Icons.email,
-                                          color: blackColor,
-                                        ),
-                                        SizedBox(
-                                          width: 4,
-                                        ),
-                                        Text(
-                                          'Address: ',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-
-                                  // Icon(Icons.language, color: blackColor),
-
-                                  title: Text(
-                                    companyDetailData?.first.address ?? '',
-
-                                    // 'www.moniza.et.com',
-                                    style: TextStyle(),
-                                  ),
-                                  // trailing:
-                                  // companyDetailData?.first.website == ''
-                                  // ? Container(
-                                  //     width: 10,
-                                  //   )
-                                  //     CustomButton(
-                                  //   callbackAction: () {
-                                  //     lauchEmail(
-                                  //         companyDetailData?.first.email ?? '');
-                                  //   },
-                                  //   buttonText: 'Email',
-                                  //   width: 70,
-                                  //   height: 30,
-                                  //   buttonColor: baseColor,
-                                  //   textColor: blackColor,
-                                  // ),
-                                )
-                              ],
-                            ),
-                          ),
                         ],
                       ),
                     );
@@ -862,9 +255,580 @@ class _CompanyInfoState extends State<CompanyInfo> {
                 }),
           ),
 
+            SliverToBoxAdapter(child:
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10.0),
+              child: Container(
+                // height: ,
+                padding: EdgeInsets.all(8),
+                width: double.infinity,
+                color: Colors.grey[300],
+                child: Center(
+                  child: Text(
+                    'PRODUCT AND SERVICES',
+                    style: GoogleFonts.roboto(
+                        color: Color.fromRGBO(3, 166, 120, 1),
+                        fontSize: 22,
+                        decoration: TextDecoration.underline),
+                  ),
+                ),
+              ),
+            ),),
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+              childCount:2,
+                  (context, index) =>
+                      FutureBuilder(
+                        future: getBusinessProducts(),
+                        builder: (context,snapshot) {
+                          return Container(
+                            height:251,
+                            width: 700,
+                            // color: Colors.red,
+
+                            child:    Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+
+
+                                            //photo and servies
+
+
+
+                                     // Text('HUMAN RESOURCE (HRM) AND PAYROLL SOFTWARE DEVELOPMENT AND SUPPLY'),
+
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(15,0,5,0),
+                                child: DropCapText(
+                                  "$test1,\n $test2",
+
+                                  // forceNoDescent: true,
+                                  // parseInlineMarkdown:false
+                                  // "Our human resource and  software is a state of the art system that can manage all employee information and easily process payroll. The HRM and payroll systems allows you to avoid manual payroll calculations that will save you valuable time and give you accuracy and consistency.",
+                                  parseInlineMarkdown: true,
+                                  // dropCapStyle: TextStyle(fontSize: 100, fontWeight: FontWeight.bold, color: Colors.green),
+                                  dropCapPadding: EdgeInsets.only(right: 20.0),
+                                  style: TextStyle(fontSize: 14.0, height: 1.7),
+                                  textAlign:TextAlign.start,
+                                  dropCap: DropCap(
+                                      width: 150,
+                                      height: 100,
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(left:8.0),
+                                        child: Container(
+                                           decoration:BoxDecoration(
+                                          border: Border.all(color:Colors.black),
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Image(image: AssetImage('assets/addisbiz.jpg'),),
+                                        )),
+                                      ),
+                                  ),
+                                ),
+                              ),
+                                  Divider(color: blackColor,thickness: 0.4,),
+                                            // Row(
+                                            //   crossAxisAlignment: CrossAxisAlignment.start,
+                                            //   mainAxisAlignment: MainAxisAlignment.start,
+                                            //   children: [
+                                            //     Container(
+                                            //       decoration: BoxDecoration(
+                                            //           border: Border.all(color: blackColor)),
+                                            //       child: Padding(
+                                            //         padding: const EdgeInsets.all(8.0),
+                                            //         child: Image(
+                                            //           image: AssetImage('assets/addisbiz.jpg'),
+                                            //           width: 100,
+                                            //           height: 70,
+                                            //           fit: BoxFit.cover,
+                                            //         ),
+                                            //       ),
+                                            //     ),
+                                            //     SizedBox(
+                                            //       width: 10,
+                                            //     ),
+                                            //     Container(
+                                            //       height: 400,
+                                            //       width: 400,
+                                            //       child: Column(
+                                            //         // crossAxisAlignment: CrossAxisAlignment.start,
+                                            //         // mainAxisAlignment: MainAxisAlignment.start,
+                                            //         children: [
+                                            //           Expanded(
+                                            //             child: Text(
+                                            //               overflow:TextOverflow.fade,
+                                            //                 maxLines:3,
+                                            //                 softWrap:true,
+                                            //                 'INVENTORY / STOCK MANAGEMENT SOFTWARE DEVELOPMENT AND SUPPLY '),
+                                            //           ),
+                                            //           SizedBox(height: 10,),
+                                            //
+                                            //           Expanded(
+                                            //             flex: 2,
+                                            //             child: Text(
+                                            //                 ' Our human resource and payroll software is a state of the art system that can manage all employee information and easily process payroll. The HRM and payroll systems allows you to avoid manual payroll calculations that will save you valuable time and give you accuracy and consistency.'),
+                                            //           ),
+                                            //         ],
+                                            //       ),
+                                            //     ),
+                                            //   ],
+                                            // )
+                                          ]) ,
+
+
+
+                          );
+                        }
+                      ),
+              // childCount: 1, // Replace itemCount with the actual number of items you want to display
+            ),
+          ),
+
+
+
+
+
+
+
+          // SliverToBoxAdapter(
+          //   child: Container(
+          //     width: 700,
+          //     height: 770,
+          //     color: Colors.purple,
+          //     child: ListView.builder(
+          //       itemBuilder: ((context, index) => Container(
+          //             color: const Color.fromRGBO(105, 240, 174, 1),
+          //           )),
+          //     ),
+          //   ),
+          //   ),
+          //     // child: ListView.builder(
+          //     //   shrinkWrap: true,
+          //     //   itemCount: 1,
+          //     //   itemBuilder: ((context, index) => Container(
+          //     //         height: 500,
+          //     //         width: 700,
+          //     //         child: Column(children: [
+          //     //           // /product and services
+          //     //           Padding(
+          //     //             padding: const EdgeInsets.symmetric(vertical: 10.0),
+          //     //             child: Container(
+          //     //               // height: ,
+          //     //               padding: EdgeInsets.all(8),
+          //     //               width: double.infinity,
+          //     //               color: Colors.grey[300],
+          //     //               child: Center(
+          //     //                 child: Text(
+          //     //                   'PRODUCT AND SERVICES',
+          //     //                   style: GoogleFonts.roboto(
+          //     //                       color: Color.fromRGBO(3, 166, 120, 1),
+          //     //                       fontSize: 22,
+          //     //                       decoration: TextDecoration.underline),
+          //     //                 ),
+          //     //               ),
+          //     //             ),
+          //     //           ),
+          //
+          //     //           //photo and servies
+          //     //           Row(
+          //     //             crossAxisAlignment: CrossAxisAlignment.start,
+          //     //             // mainAxisAlignment: MainAxisAlignment.start,
+          //     //             children: [
+          //     //               Container(
+          //     //                 decoration: BoxDecoration(
+          //     //                     border: Border.all(color: blackColor)),
+          //     //                 child: Padding(
+          //     //                   padding: const EdgeInsets.all(8.0),
+          //     //                   child: Image(
+          //     //                     image: AssetImage('assets/addisbiz.jpg'),
+          //     //                     width: 100,
+          //     //                     height: 70,
+          //     //                     fit: BoxFit.cover,
+          //     //                   ),
+          //     //                 ),
+          //     //               ),
+          //     //               SizedBox(
+          //     //                 width: 10,
+          //     //               ),
+          //     //               Expanded(
+          //     //                 // height: MediaQuery.of(context).size.height,.
+          //     //                 child: Column(
+          //     //                   // crossAxisAlignment: CrossAxisAlignment.start,
+          //     //                   // mainAxisAlignment: MainAxisAlignment.start,
+          //     //                   children: [
+          //     //                     Text(
+          //     //                         'INVENTORY / STOCK MANAGEMENT SOFTWARE DEVELOPMENT AND SUPPLY '),
+          //     //                     Expanded(
+          //     //                       child: Text(
+          //     //                           " SOFTWARE VELOPMENT  MANAGEMENT SOFTWARE DEVELOPMENT AND SUPPLY "),
+          //     //                     )
+          //     //                   ],
+          //     //                 ),
+          //     //               ),
+          //     //             ],
+          //     //           )
+          //     //         ]),
+          //     //       )),
+          //     // ),
+          //   ),
+          // ),
+
+          SliverToBoxAdapter(
+            child: Container(
+              height: 420,
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10.0),
+                    child: Container(
+                      // height: ,
+                      padding: EdgeInsets.all(8),
+                      width: double.infinity,
+                      color: Colors.grey[300],
+                      child: Center(
+                        child: Text(
+                          'CONTACT INFORMATION',
+                          style: GoogleFonts.roboto(
+                              color: Color.fromRGBO(3, 166, 120, 1),
+                              fontSize: 22,
+                              decoration: TextDecoration.underline),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    // height: MediaQuery.of(context).size.height * 0.6,
+                    // flex: 2,
+                    child: ListView(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      children: [
+                        //mobile code
+                        // companyDetailData?.first.mobile == ''
+                        // ? Container(
+                        //     width: 5,
+                        //     height: 5,
+                        //   )
+                        ListTile(
+                          leading: Container(
+                            width: MediaQuery.of(context).size.width * 0.30,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.phone_android,
+                                  color: blackColor,
+                                ),
+                                SizedBox(
+                                  width: 4,
+                                ),
+                                Text(
+                                  'Mobile: ',
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
+                          ),
+                          title: Container(
+                            height: mobileNumbers.length * 30,
+                            child: ListView.builder(
+                                itemCount: mobileNumbers.length,
+                                itemBuilder: (context, index) {
+                                  return Padding(
+                                    padding:
+                                        const EdgeInsets.only(bottom: 10.0),
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        openPhoneDialer(mobileNumbers[index]);
+                                      },
+                                      child: Text(
+                                        style: TextStyle(color: Colors.blue),
+                                        mobileNumbers[index],
+                                      ),
+                                    ),
+                                  );
+                                }),
+                          ),
+                          // title: Text(
+                          //   textAlign: TextAlign.center,
+
+                          //   companyDetailData?.first.mobile ?? "",
+
+                          //   // '091231212',
+                          //   style: TextStyle(
+                          //     letterSpacing: 1,
+                          //   ),
+                          // ),
+                          trailing: CustomButton(
+                            callbackAction: () {
+                              openPhoneDialer(mobileNumbers.first);
+                            },
+                            buttonText: 'Call',
+                            width: 70,
+                            height: 30,
+                            buttonColor: baseColor,
+                            textColor: blackColor,
+                          ),
+                        ),
+                        Divider(height: 1, color: blackColor, thickness: 0.3),
+                        // companyDetailData?.first.office == ''
+                        //     ? Container(
+                        //         height: 1,
+                        //         width: 1,
+                        //       )
+                        ListTile(
+                          leading: Container(
+                            width: MediaQuery.of(context).size.width * 0.30,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.phone_android,
+                                  color: blackColor,
+                                ),
+                                SizedBox(
+                                  width: 4,
+                                ),
+                                Text(
+                                  'Telephone: ',
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
+                          ),
+                          // title: Text(
+                          //   companyDetailData?.first.office ??
+                          //       '',
+                          // ),
+                          title: Container(
+                            height: officeNumbers.length * 25,
+                            child: ListView.builder(
+                                itemCount: mobileNumbers.length,
+                                itemBuilder: (context, index) {
+                                  return Padding(
+                                    padding:
+                                        const EdgeInsets.only(bottom: 10.0),
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        openPhoneDialer(officeNumbers[index]);
+                                      },
+                                      child: Text(
+                                        style: TextStyle(color: Colors.blue),
+                                        officeNumbers[index],
+                                      ),
+                                    ),
+                                  );
+                                }),
+                          ),
+                          trailing: CustomButton(
+                            callbackAction: () {
+                              openPhoneDialer(
+                                  companyDetailData?.first.office ?? '');
+                            },
+                            buttonText: 'Call',
+                            width: 70,
+                            height: 30,
+                            buttonColor: baseColor,
+                            textColor: blackColor,
+                          ),
+                        ),
+                        Divider(
+                          height: 1,
+                          thickness: 0.3,
+                          color: blackColor,
+                        ),
+
+                        ListTile(
+                          //showing leading and trailing based on presence of the data
+                          leading:
+                              // companyDetailData?.first.website == ''
+                              // ?Container(
+                              //     width: 1,
+                              //     height: 1,
+                              Container(
+                            width: MediaQuery.of(context).size.width * 0.30,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.email,
+                                  color: blackColor,
+                                ),
+                                SizedBox(
+                                  width: 4,
+                                ),
+                                Text(
+                                  'Email: ',
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
+                          ),
+
+                          // Icon(Icons.language, color: blackColor),
+
+                          title: Text(
+                            companyDetailData?.first.email ?? '',
+
+                            // 'www.moniza.et.com',
+                            style: TextStyle(),
+                          ),
+                          trailing:
+                              // companyDetailData?.first.website == ''
+                              // ? Container(
+                              //     width: 10,
+                              //   )
+                              CustomButton(
+                            callbackAction: () {
+                              lauchEmail(companyDetailData?.first.email ?? '');
+                            },
+                            buttonText: 'Email',
+                            width: 70,
+                            height: 30,
+                            buttonColor: baseColor,
+                            textColor: blackColor,
+                          ),
+                        ),
+
+                        Divider(
+                          height: 1,
+                          thickness: 0.3,
+                          color: blackColor,
+                        ),
+
+                        ListTile(
+                          //showing leading and trailing based on presence of the data
+                          leading:
+                              // companyDetailData?.first.website == ''
+                              // ?Container(
+                              //     width: 1,
+                              //     height: 1,
+                              Container(
+                            width: MediaQuery.of(context).size.width * 0.30,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.language,
+                                  color: blackColor,
+                                ),
+                                SizedBox(
+                                  width: 4,
+                                ),
+                                Text(
+                                  'Website: ',
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
+                          ),
+
+                          // Icon(Icons.language, color: blackColor),
+
+                          title: Text(
+                            companyDetailData?.first.website ?? '',
+
+                            // 'www.moniza.et.com',
+                            style: TextStyle(),
+                          ),
+                          trailing:
+                              // companyDetailData?.first.website == ''
+                              // ? Container(
+                              //     width: 10,
+                              //   )
+                              CustomButton(
+                            callbackAction: () {
+                              var parsedUri = Uri.parse(
+                                  companyDetailData?.first.website ?? "");
+                              print(companyDetailData?.first.website);
+                              _launchUrl(
+                                  companyDetailData?.first.website ?? '');
+                            },
+                            buttonText: 'visit',
+                            width: 70,
+                            height: 30,
+                            buttonColor: baseColor,
+                            textColor: blackColor,
+                          ),
+                        ),
+
+                        Divider(
+                          height: 1,
+                          thickness: 0.3,
+                          color: blackColor,
+                        ),
+
+                        ListTile(
+                          //showing leading and trailing based on presence of the data
+                          leading:
+                              // companyDetailData?.first.website == ''
+                              // ?Container(
+                              //     width: 1,
+                              //     height: 1,
+                              Container(
+                            width: MediaQuery.of(context).size.width * 0.30,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.email,
+                                  color: blackColor,
+                                ),
+                                SizedBox(
+                                  width: 4,
+                                ),
+                                Text(
+                                  'Address: ',
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
+                          ),
+
+                          // Icon(Icons.language, color: blackColor),
+
+                          title: Text(
+                            companyDetailData?.first.address ?? '',
+
+                            // 'www.moniza.et.com',
+                            style: TextStyle(),
+                          ),
+                          // trailing:
+                          // companyDetailData?.first.website == ''
+                          // ? Container(
+                          //     width: 10,
+                          //   )
+                          //     CustomButton(
+                          //   callbackAction: () {
+                          //     lauchEmail(
+                          //         companyDetailData?.first.email ?? '');
+                          //   },
+                          //   buttonText: 'Email',
+                          //   width: 70,
+                          //   height: 30,
+                          //   buttonColor: baseColor,
+                          //   textColor: blackColor,
+                          // ),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+
           SliverToBoxAdapter(
               child: Container(
-            height: MediaQuery.of(context).size.height * 0.50,
+            // height: MediaQuery.of(context).size.height * 0.50,
+                height: 342,
             color: Colors.white,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -885,8 +849,8 @@ class _CompanyInfoState extends State<CompanyInfo> {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return shimmerLoadingFeatured();
                   }
-                  List<Verifiedbusiness> verifiedBusinessList =
-                      snapshot.data ?? [];
+                  // List<Verifiedbusiness> verifiedBusinessList =
+                  //     snapshot.data ?? [];
                   // print(verifiedBusinessList.first.nm);
                   return Padding(
                     padding: const EdgeInsets.fromLTRB(0, 10, 0, 50),
@@ -1142,16 +1106,16 @@ Future<List<Business>> getCompanyDetail() async {
     if (response.statusCode == 200) {
       var jsonBody = response.body;
       var jsonDecoded = jsonDecode(jsonBody);
-      print('Json decoded=============>$jsonDecoded');
+      // print('Json decoded=============>$jsonDecoded');
 
       if (jsonDecoded['business'] != null) {
         var jsonObject = jsonDecoded['business'];
-        print('Json as List ==>$jsonObject');
+        // print('Json as List ==>$jsonObject');
 
         if (jsonObject is Map<String, dynamic>) {
           var jsonList = [jsonObject];
-          print(
-              'json object after changed to list=========================================>$jsonList');
+          // print(
+              // 'json object after changed to list=========================================>$jsonList');
 
           return jsonList.map((json) => Business.fromJson(json)).toList();
         } else {
@@ -1164,6 +1128,47 @@ Future<List<Business>> getCompanyDetail() async {
     } else {
       // Handle the case when the API request fails
       throw Exception('Failed to fetch company datadetail');
+    }
+  } catch (e) {
+    print('Error in getCompanyDatadetail(): $e');
+    throw e;
+  }
+}
+Future<List<Business>> getBusinessProducts() async {
+  try {
+    var uri =
+    ('https://addisbiz.com/business-directory/api/v1/business_directory_company?id=$businessId');
+    var companyUri = Uri.parse(uri);
+    // print('COMPANY URI=====>>>>$companyUri');
+
+    // var companyUritry = Uri.parse(uri);
+
+    var response = await http.get(companyUri);
+    if (response.statusCode == 200) {
+      var jsonBody = response.body;
+      var jsonDecoded = jsonDecode(jsonBody);
+      print('Json decoded for company products=============>$jsonDecoded');
+
+      if (jsonDecoded['businessproducts'] != null) {
+        var jsonObject = jsonDecoded['businessproducts'];
+        print('Json as List ==>$jsonObject');
+
+        if (jsonObject is Map<String, dynamic>) {
+          var jsonList = [jsonObject];
+          print(
+              'json object after changed to list company product=========================================>$jsonList');
+
+          return jsonList.map((json) => Business.fromJson(json)).toList();
+        } else {
+          throw Exception('Json is in unexpected format');
+        }
+      } else {
+        throw Exception(
+            'No business data found (in companyproduct) business is null');
+      }
+    } else {
+      // Handle the case when the API request fails
+      throw Exception('Failed to fetch company product');
     }
   } catch (e) {
     print('Error in getCompanyDatadetail(): $e');
