@@ -54,7 +54,7 @@ class _CategoryState extends State<Category> {
                         // width: itemWidth,
                         decoration: BoxDecoration(
                           //================
-                          color: Theme.of(context).backgroundColor,
+                          // color: Theme.of(context).backgroundColor,
                           //===================================
                           borderRadius: BorderRadius.circular(10),
                         ),
@@ -131,7 +131,7 @@ class _CategoryState extends State<Category> {
               height: 200,
               decoration: BoxDecoration(
                 //================
-                color: Theme.of(context).backgroundColor,
+                // color: Theme.of(context).backgroundColor,
                 //===================================
                 borderRadius: BorderRadius.circular(10),
               ),

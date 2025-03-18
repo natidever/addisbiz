@@ -5,7 +5,7 @@ import 'package:shimmer/shimmer.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:drop_cap_text/drop_cap_text.dart';
+// import 'package:drop_cap_text/drop_cap_text.dart';
 
 import 'package:addisbiz/constants.dart';
 import 'package:addisbiz/entites/companydata.dart';
@@ -37,9 +37,9 @@ class _CompanyInfoState extends State<CompanyInfo> {
   }
 
   List<Business>? companyDetailData;
-  static String?imageEndePoint;
-  String ?imageUri = "https://addisbiz.com/business-directory/wp-content/uploads/products/$imageEndePoint";
-
+  static String? imageEndePoint;
+  String? imageUri =
+      "https://addisbiz.com/business-directory/wp-content/uploads/products/$imageEndePoint";
 
   void openPhoneDialer(String phoneNumber) async {
     print("=====================call functionn=======================");
@@ -59,18 +59,17 @@ class _CompanyInfoState extends State<CompanyInfo> {
     final arguments =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     businessId = arguments['businessId'];
-    String test1="HUMAN RESOURCE (HRM) AND PAYROLL SOFTWARE DEVELOPMENT AND SUPPLY'";
-    String test2 = "Our human resource and payroll software is a state of the art system that can manage all employee information and easily process payroll. The HRM and payroll systems allows you to avoid manual payroll calculations that will save you valuable time and give you accuracy and consistency.";
-     // TextSpan textSpan =TextSpan(
-     //   text: test1,
-     //   style: TextStyle(color:Colors.red,fontSize: 50,),
-     //
-     // );
-     // RichText richText = RichText(text: textSpan);
-     // String test11=textSpan.toPlainText();
-
-
-
+    String test1 =
+        "HUMAN RESOURCE (HRM) AND PAYROLL SOFTWARE DEVELOPMENT AND SUPPLY'";
+    String test2 =
+        "Our human resource and payroll software is a state of the art system that can manage all employee information and easily process payroll. The HRM and payroll systems allows you to avoid manual payroll calculations that will save you valuable time and give you accuracy and consistency.";
+    // TextSpan textSpan =TextSpan(
+    //   text: test1,
+    //   style: TextStyle(color:Colors.red,fontSize: 50,),
+    //
+    // );
+    // RichText richText = RichText(text: textSpan);
+    // String test11=textSpan.toPlainText();
 
     String styledString = 'Hello, world!';
 
@@ -90,14 +89,6 @@ class _CompanyInfoState extends State<CompanyInfo> {
 
 // Now you can use the `richText` widget or extract the styled text as a string.
     String styledTextString = textSpan.toPlainText();
-
-
-
-
-
-
-
-
 
     List<String> mobileNumbers =
         companyDetailData?.first.mobile?.split(';') ?? [];
@@ -195,7 +186,7 @@ class _CompanyInfoState extends State<CompanyInfo> {
                       // height: MediaQuery.sizeOf(context).height * 0.98,
                       height: 450,
                       width: double.infinity,
-                      color: Theme.of(context).backgroundColor,
+                      // color: Theme.of(context).backgroundColor,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
@@ -255,8 +246,8 @@ class _CompanyInfoState extends State<CompanyInfo> {
                 }),
           ),
 
-            SliverToBoxAdapter(child:
-            Padding(
+          SliverToBoxAdapter(
+            child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 10.0),
               child: Container(
                 // height: ,
@@ -273,124 +264,117 @@ class _CompanyInfoState extends State<CompanyInfo> {
                   ),
                 ),
               ),
-            ),),
+            ),
+          ),
           SliverList(
             delegate: SliverChildBuilderDelegate(
-              childCount:2,
-                  (context, index) =>
-                      FutureBuilder(
-                        future: getBusinessProducts(),
-                        builder: (context,snapshot) {
-                          return Container(
-                            height:251,
-                            width: 700,
-                            // color: Colors.red,
+              childCount: 2,
+              (context, index) => FutureBuilder(
+                  future: getBusinessProducts(),
+                  builder: (context, snapshot) {
+                    return Container(
+                      height: 251,
+                      width: 700,
+                      // color: Colors.red,
 
-                            child:    Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            //photo and servies
 
+                            // Text('HUMAN RESOURCE (HRM) AND PAYROLL SOFTWARE DEVELOPMENT AND SUPPLY'),
 
-                                            //photo and servies
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(15, 0, 5, 0),
+                              // child: DropCapText(
+                              //   "$test1,\n $test2",
 
-
-
-                                     // Text('HUMAN RESOURCE (HRM) AND PAYROLL SOFTWARE DEVELOPMENT AND SUPPLY'),
-
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(15,0,5,0),
-                                child: DropCapText(
-                                  "$test1,\n $test2",
-
-                                  // forceNoDescent: true,
-                                  // parseInlineMarkdown:false
-                                  // "Our human resource and  software is a state of the art system that can manage all employee information and easily process payroll. The HRM and payroll systems allows you to avoid manual payroll calculations that will save you valuable time and give you accuracy and consistency.",
-                                  parseInlineMarkdown: true,
-                                  // dropCapStyle: TextStyle(fontSize: 100, fontWeight: FontWeight.bold, color: Colors.green),
-                                  dropCapPadding: EdgeInsets.only(right: 20.0),
-                                  style: TextStyle(fontSize: 14.0, height: 1.7),
-                                  textAlign:TextAlign.start,
-                                  dropCap: DropCap(
-                                      width: 150,
-                                      height: 100,
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(left:8.0),
-                                        child: Container(
-                                           decoration:BoxDecoration(
-                                          border: Border.all(color:Colors.black),
-                                        ),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Image(image: AssetImage('assets/addisbiz.jpg'),),
-                                        )),
-                                      ),
-                                  ),
-                                ),
-                              ),
-                                  Divider(color: blackColor,thickness: 0.4,),
-                                            // Row(
-                                            //   crossAxisAlignment: CrossAxisAlignment.start,
-                                            //   mainAxisAlignment: MainAxisAlignment.start,
-                                            //   children: [
-                                            //     Container(
-                                            //       decoration: BoxDecoration(
-                                            //           border: Border.all(color: blackColor)),
-                                            //       child: Padding(
-                                            //         padding: const EdgeInsets.all(8.0),
-                                            //         child: Image(
-                                            //           image: AssetImage('assets/addisbiz.jpg'),
-                                            //           width: 100,
-                                            //           height: 70,
-                                            //           fit: BoxFit.cover,
-                                            //         ),
-                                            //       ),
-                                            //     ),
-                                            //     SizedBox(
-                                            //       width: 10,
-                                            //     ),
-                                            //     Container(
-                                            //       height: 400,
-                                            //       width: 400,
-                                            //       child: Column(
-                                            //         // crossAxisAlignment: CrossAxisAlignment.start,
-                                            //         // mainAxisAlignment: MainAxisAlignment.start,
-                                            //         children: [
-                                            //           Expanded(
-                                            //             child: Text(
-                                            //               overflow:TextOverflow.fade,
-                                            //                 maxLines:3,
-                                            //                 softWrap:true,
-                                            //                 'INVENTORY / STOCK MANAGEMENT SOFTWARE DEVELOPMENT AND SUPPLY '),
-                                            //           ),
-                                            //           SizedBox(height: 10,),
-                                            //
-                                            //           Expanded(
-                                            //             flex: 2,
-                                            //             child: Text(
-                                            //                 ' Our human resource and payroll software is a state of the art system that can manage all employee information and easily process payroll. The HRM and payroll systems allows you to avoid manual payroll calculations that will save you valuable time and give you accuracy and consistency.'),
-                                            //           ),
-                                            //         ],
-                                            //       ),
-                                            //     ),
-                                            //   ],
-                                            // )
-                                          ]) ,
-
-
-
-                          );
-                        }
-                      ),
+                              //   // forceNoDescent: true,
+                              //   // parseInlineMarkdown:false
+                              //   // "Our human resource and  software is a state of the art system that can manage all employee information and easily process payroll. The HRM and payroll systems allows you to avoid manual payroll calculations that will save you valuable time and give you accuracy and consistency.",
+                              //   parseInlineMarkdown: true,
+                              //   // dropCapStyle: TextStyle(fontSize: 100, fontWeight: FontWeight.bold, color: Colors.green),
+                              //   dropCapPadding: EdgeInsets.only(right: 20.0),
+                              //   style: TextStyle(fontSize: 14.0, height: 1.7),
+                              //   textAlign: TextAlign.start,
+                              //   dropCap: DropCap(
+                              //     width: 150,
+                              //     height: 100,
+                              //     child: Padding(
+                              //       padding: const EdgeInsets.only(left: 8.0),
+                              //       child: Container(
+                              //           decoration: BoxDecoration(
+                              //             border:
+                              //                 Border.all(color: Colors.black),
+                              //           ),
+                              //           child: Padding(
+                              //             padding: const EdgeInsets.all(8.0),
+                              //             child: Image(
+                              //               image: AssetImage(
+                              //                   'assets/addisbiz.jpg'),
+                              //             ),
+                              //           )),
+                              //     ),
+                              //   ),
+                              // ),
+                            ),
+                            Divider(
+                              color: blackColor,
+                              thickness: 0.4,
+                            ),
+                            // Row(
+                            //   crossAxisAlignment: CrossAxisAlignment.start,
+                            //   mainAxisAlignment: MainAxisAlignment.start,
+                            //   children: [
+                            //     Container(
+                            //       decoration: BoxDecoration(
+                            //           border: Border.all(color: blackColor)),
+                            //       child: Padding(
+                            //         padding: const EdgeInsets.all(8.0),
+                            //         child: Image(
+                            //           image: AssetImage('assets/addisbiz.jpg'),
+                            //           width: 100,
+                            //           height: 70,
+                            //           fit: BoxFit.cover,
+                            //         ),
+                            //       ),
+                            //     ),
+                            //     SizedBox(
+                            //       width: 10,
+                            //     ),
+                            //     Container(
+                            //       height: 400,
+                            //       width: 400,
+                            //       child: Column(
+                            //         // crossAxisAlignment: CrossAxisAlignment.start,
+                            //         // mainAxisAlignment: MainAxisAlignment.start,
+                            //         children: [
+                            //           Expanded(
+                            //             child: Text(
+                            //               overflow:TextOverflow.fade,
+                            //                 maxLines:3,
+                            //                 softWrap:true,
+                            //                 'INVENTORY / STOCK MANAGEMENT SOFTWARE DEVELOPMENT AND SUPPLY '),
+                            //           ),
+                            //           SizedBox(height: 10,),
+                            //
+                            //           Expanded(
+                            //             flex: 2,
+                            //             child: Text(
+                            //                 ' Our human resource and payroll software is a state of the art system that can manage all employee information and easily process payroll. The HRM and payroll systems allows you to avoid manual payroll calculations that will save you valuable time and give you accuracy and consistency.'),
+                            //           ),
+                            //         ],
+                            //       ),
+                            //     ),
+                            //   ],
+                            // )
+                          ]),
+                    );
+                  }),
               // childCount: 1, // Replace itemCount with the actual number of items you want to display
             ),
           ),
-
-
-
-
-
-
 
           // SliverToBoxAdapter(
           //   child: Container(
@@ -828,7 +812,7 @@ class _CompanyInfoState extends State<CompanyInfo> {
           SliverToBoxAdapter(
               child: Container(
             // height: MediaQuery.of(context).size.height * 0.50,
-                height: 342,
+            height: 342,
             color: Colors.white,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -843,61 +827,61 @@ class _CompanyInfoState extends State<CompanyInfo> {
                     ),
                   ),
                 ),
-                FutureBuilder<List<Verifiedbusiness>>(
-                    // future: getVerifiedbusiness(),
-                    builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return shimmerLoadingFeatured();
-                  }
-                  // List<Verifiedbusiness> verifiedBusinessList =
-                  //     snapshot.data ?? [];
-                  // print(verifiedBusinessList.first.nm);
-                  return Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 10, 0, 50),
-                    child: Container(
-                      height: 250,
-                      child: ListView(
-                        scrollDirection: Axis.horizontal,
-                        children: List.generate(10, (index) {
-                          return Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 8.0), //pading between containers
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    // color: Colors.grey
-                                    //   color: Color.fromRGBO(226, 229, 210, 1)
-                                    //   color: Color.fromRGBO(215, 220, 222, 1),
-                                    //   color: Color.fromRGBO(57, 74, 89, 1),
-                                    color: Color.fromRGBO(215, 215, 215, 1)),
-                                width: 200,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.only(
-                                    bottomRight: Radius.circular(10),
-                                    bottomLeft: Radius.circular(10),
-                                    topRight: Radius.circular(10),
-                                    topLeft: Radius.circular(10),
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Expanded(
-                                        child: Image(
-                                          image:
-                                              AssetImage('assets/addisbiz.jpg'),
-                                          // height: 150,
-                                          // width: 200,
-                                          fit: BoxFit.fill,
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ));
-                        }),
-                      ),
-                    ),
-                  );
-                })
+                // FutureBuilder<List<Verifiedbusiness>>(
+                //     future: getVerifiedbusiness(),
+                //     builder: (context, snapshot) {
+                //   if (snapshot.connectionState == ConnectionState.waiting) {
+                //     return shimmerLoadingFeatured();
+                //   }
+                //   // List<Verifiedbusiness> verifiedBusinessList =
+                //   //     snapshot.data ?? [];
+                //   // print(verifiedBusinessList.first.nm);
+                //   return Padding(
+                //     padding: const EdgeInsets.fromLTRB(0, 10, 0, 50),
+                //     child: Container(
+                //       height: 250,
+                //       child: ListView(
+                //         scrollDirection: Axis.horizontal,
+                //         children: List.generate(10, (index) {
+                //           return Padding(
+                //               padding: const EdgeInsets.symmetric(
+                //                   horizontal: 8.0), //pading between containers
+                //               child: Container(
+                //                 decoration: BoxDecoration(
+                //                     borderRadius: BorderRadius.circular(10),
+                //                     // color: Colors.grey
+                //                     //   color: Color.fromRGBO(226, 229, 210, 1)
+                //                     //   color: Color.fromRGBO(215, 220, 222, 1),
+                //                     //   color: Color.fromRGBO(57, 74, 89, 1),
+                //                     color: Color.fromRGBO(215, 215, 215, 1)),
+                //                 width: 200,
+                //                 child: ClipRRect(
+                //                   borderRadius: BorderRadius.only(
+                //                     bottomRight: Radius.circular(10),
+                //                     bottomLeft: Radius.circular(10),
+                //                     topRight: Radius.circular(10),
+                //                     topLeft: Radius.circular(10),
+                //                   ),
+                //                   child: Column(
+                //                     children: [
+                //                       Expanded(
+                //                         child: Image(
+                //                           image:
+                //                               AssetImage('assets/addisbiz.jpg'),
+                //                           // height: 150,
+                //                           // width: 200,
+                //                           fit: BoxFit.fill,
+                //                         ),
+                //                       )
+                //                     ],
+                //                   ),
+                //                 ),
+                //               ));
+                //         }),
+                //       ),
+                //     ),
+                //   );
+                // })
               ],
             ),
           ))
@@ -1105,6 +1089,7 @@ Future<List<Business>> getCompanyDetail() async {
     var response = await http.get(companyUri);
     if (response.statusCode == 200) {
       var jsonBody = response.body;
+      print('json body=============>$jsonBody');
       var jsonDecoded = jsonDecode(jsonBody);
       // print('Json decoded=============>$jsonDecoded');
 
@@ -1115,7 +1100,7 @@ Future<List<Business>> getCompanyDetail() async {
         if (jsonObject is Map<String, dynamic>) {
           var jsonList = [jsonObject];
           // print(
-              // 'json object after changed to list=========================================>$jsonList');
+          // 'json object after changed to list=========================================>$jsonList');
 
           return jsonList.map((json) => Business.fromJson(json)).toList();
         } else {
@@ -1134,10 +1119,11 @@ Future<List<Business>> getCompanyDetail() async {
     throw e;
   }
 }
+
 Future<List<Business>> getBusinessProducts() async {
   try {
     var uri =
-    ('https://addisbiz.com/business-directory/api/v1/business_directory_company?id=$businessId');
+        ('https://addisbiz.com/business-directory/api/v1/business_directory_company?id=$businessId');
     var companyUri = Uri.parse(uri);
     // print('COMPANY URI=====>>>>$companyUri');
 

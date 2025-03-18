@@ -1,7 +1,7 @@
 import 'package:addisbiz/widgets/slider_images.dart';
 import 'package:flutter/material.dart';
 import 'package:addisbiz/constants.dart';
-import 'package:another_carousel_pro/another_carousel_pro.dart';
+// import 'package:another_carousel_pro/another_carousel_pro.dart';
 
 import '../entites/data.dart';
 import 'customtextfield.dart';
@@ -68,7 +68,7 @@ loadingSkimmer() {
               height: 90,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: Theme.of(context).backgroundColor,
+                // color: Theme.of(context).backgroundColor,
               ),
             );
           },
@@ -127,7 +127,7 @@ class _ScreenDesignState extends State<ScreenDesign> {
             ),
 
             expandedHeight: 350,
-            flexibleSpace: SliderImages(),
+            // flexibleSpace: SliderImages(),
 
             // flexibleSpace: FlexibleSpaceBar(
             //   background: Container(

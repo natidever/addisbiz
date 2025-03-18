@@ -123,8 +123,8 @@ class _CompanyListState extends State<CompanyList> {
           ),
         ),
 
-        expandedHeight: 250,
-        flexibleSpace: SliderImages(),
+        // expandedHeight: 250,
+        // flexibleSpace: SliderImages(),
       ),
       SliverToBoxAdapter(
         child: Padding(
@@ -209,7 +209,7 @@ class _CompanyListState extends State<CompanyList> {
                           return Padding(
                             padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                             child: Card(
-                              color: Theme.of(context).backgroundColor,
+                              // color: Theme.of(context).backgroundColor,
                               // color: Color.fromARGB(216, 216, 216, 1),
                               child: GestureDetector(
                                 onTap: () {

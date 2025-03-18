@@ -62,9 +62,6 @@ import 'package:flutter/material.dart';
 //
 // }
 
-
-
-
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -106,20 +103,15 @@ import '../constants.dart';
 //   }
 // }
 
-
-
-
-
-
 class DarkThemee {
   static ThemeData getTheme() {
     return ThemeData.dark().copyWith(
-      errorColor: blackColor,
+      // errorColor: blackColor,
       appBarTheme: AppBarTheme(
-        backgroundColor:Colors.black,
+        backgroundColor: Colors.black,
       ),
       scaffoldBackgroundColor: Colors.black,
-     backgroundColor: containerColorForBlack,
+      //  backgroundColor: containerColorForBlack,
       hintColor: Colors.grey,
       secondaryHeaderColor: containerColorForBlack,
       cardColor: buttonColorForBlack,
@@ -133,15 +125,13 @@ class DarkThemee {
       //     onSurface: Colors.white)
       // ...
     );
-
   }
 }
 
-class LightThemee{
+class LightThemee {
   static ThemeData getTheme() {
-
     return ThemeData.light().copyWith(
-      errorColor: appBarColor,
+      // errorColor: appBarColor,
       shadowColor: Colors.black,
       secondaryHeaderColor: Colors.white,
       hintColor: Colors.white,
@@ -149,11 +139,9 @@ class LightThemee{
         backgroundColor: appBarColor,
       ),
       // Customize the light theme colors here
-      backgroundColor:Colors.white,
+      // backgroundColor:Colors.white,
       scaffoldBackgroundColor: backgroundColorForLightMode,
       cardColor: buttonColorForBlack,
-
-
 
       //   colorScheme: ColorScheme(
       //       brightness: Brightness.light, primary: Colors.white,
@@ -163,7 +151,6 @@ class LightThemee{
       //       onBackground: Colors.black, surface: Colors.black,
       //       onSurface: Colors.black,)
       // // ...
-
 
       // ...
     );

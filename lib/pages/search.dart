@@ -65,7 +65,7 @@ class Search extends SearchDelegate {
               child: ListView.separated(
                 itemBuilder: (context, index) {
                   return Card(
-                    color: Theme.of(context).backgroundColor,
+                    // color: Theme.of(context).backgroundColor,
                     // color: Color.fromARGB(216, 216, 216, 1),
                     child: GestureDetector(
                       onTap: () {

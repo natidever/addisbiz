@@ -10,7 +10,7 @@ import 'package:addisbiz/constants.dart';
 import 'package:addisbiz/entites/data.dart';
 import 'package:flutter/services.dart';
 import '../entites/api.dart';
-import 'package:another_carousel_pro/another_carousel_pro.dart';
+// import 'package:another_carousel_pro/another_carousel_pro.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:http/http.dart' as http;
 
@@ -59,7 +59,7 @@ shimmerLoading() {
           child: Container(
             decoration: BoxDecoration(
               //================
-              color: Theme.of(context).backgroundColor,
+              // color: Theme.of(context).backgroundColor,
               //===================================
               borderRadius: BorderRadius.circular(10),
             ),
@@ -92,7 +92,7 @@ shimmerLoadingFeatured() {
               height: 150,
               decoration: BoxDecoration(
                 //================
-                color: Theme.of(context).backgroundColor,
+                // color: Theme.of(context).backgroundColor,
                 //===================================
                 borderRadius: BorderRadius.circular(10),
               ),
@@ -147,7 +147,7 @@ Widget horizontalScrollCards(BuildContext context) {
                     // width: itemWidth,
                     decoration: BoxDecoration(
                       //================
-                      color: Theme.of(context).backgroundColor,
+                      // color: Theme.of(context).backgroundColor,
                       //===================================
                       borderRadius: BorderRadius.circular(10),
                     ),
@@ -248,54 +248,82 @@ class _HomePageState extends State<HomePage> {
           physics: ScrollPhysics(),
           shrinkWrap: true,
           slivers: [
-            SliverAppBar(
-              pinned: true,
-              elevation: 0.0,
-              // backgroundColor: Color.fromRGBO(250, 235, 215, 1),
-
-              // backgroundColor: Colors.black,
-              backgroundColor: baseColor,
-
-              leading: Padding(
-                padding: const EdgeInsets.fromLTRB(10, 10, 0, 0),
-                child: IconButton(
-                  icon: Image.asset(
-                    'assets/icons/menu (1).png',
-                  ),
-                  onPressed: () {
-                    scaffoldKey.currentState?.openDrawer(); // Open the drawer
-                  },
-                ),
-              ),
-
-              expandedHeight: 350,
-
-              flexibleSpace: FlexibleSpaceBar(
-                background: Container(
-                  child: AnotherCarousel(
-                      animationCurve: Curves.linear,
-                      autoplayDuration: Duration(seconds: 2),
-                      indicatorBgPadding: 4,
-                      dotBgColor: Colors.transparent,
-                      boxFit: BoxFit.fill,
-                      showIndicator: false,
-                      dotSize: 2,
-                      images: [
-                        AssetImage('assets/addisbiz.jpg'),
-                        AssetImage('assets/addisbiz.jpg'),
-                        AssetImage('assets/headerimage.jpg'),
-                      ]),
-                ),
-              ),
-            ),
             SliverToBoxAdapter(
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
-                child: CustomTextField(
-                  hintText: "Search any business here ...",
-                ),
+              child: Stack(
+                children: [
+                  Container(
+                    height: 400,
+                    width: MediaQuery.of(context).size.width,
+                    color: Color.fromRGBO(250, 235, 215, 1),
+                  ),
+
+                  Positioned(
+                    bottom: -50,
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      child: Padding(
+                        padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+                        child: CustomTextField(
+                          hintText: "Search any business here ...",
+                        ),
+                      ),
+                    ),
+                  )
+                  // Positioned(
+                  //   child: SliverToBoxAdapter(
+                  //                 child: Padding(
+                  //                   padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+                  //                   child: CustomTextField(
+                  //   hintText: "Search any business here ...",
+                  //                   ),
+                  //                 ),
+                  //               ),
+                  // )
+                  // SliverAppBar(
+                  //   pinned: true,
+                  //   elevation: 0.0,
+                  //   // backgroundColor: Color.fromRGBO(250, 235, 215, 1),
+
+                  //   // backgroundColor: Colors.black,
+                  //   backgroundColor: baseColor,
+
+                  //   leading: Padding(
+                  //     padding: const EdgeInsets.fromLTRB(10, 10, 0, 0),
+                  //     child: IconButton(
+                  //       icon: Image.asset(
+                  //         'assets/icons/menu (1).png',
+                  //       ),
+                  //       onPressed: () {
+                  //         scaffoldKey.currentState
+                  //             ?.openDrawer(); // Open the drawer
+                  //       },
+                  //     ),
+                  //   ),
+
+                  //   expandedHeight: 350,
+
+                  //   flexibleSpace: FlexibleSpaceBar(
+                  //     background: Container(
+                  //         // child: AnotherCarousel(
+                  //         //     animationCurve: Curves.linear,
+                  //         //     autoplayDuration: Duration(seconds: 2),
+                  //         //     indicatorBgPadding: 4,
+                  //         //     dotBgColor: Colors.transparent,
+                  //         //     boxFit: BoxFit.fill,
+                  //         //     showIndicator: false,
+                  //         //     dotSize: 2,
+                  //         //     images: [
+                  //         //       AssetImage('assets/addisbiz.jpg'),
+                  //         //       AssetImage('assets/addisbiz.jpg'),
+                  //         //       AssetImage('assets/headerimage.jpg'),
+                  //         //     ]),
+                  //         ),
+                  //   ),
+                  // ),
+                ],
               ),
             ),
+
             SliverToBoxAdapter(
               child: horizontalScrollCards(context),
               // child: Text("debugging message"),
